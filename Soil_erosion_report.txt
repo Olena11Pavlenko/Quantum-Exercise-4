@@ -1,0 +1,23 @@
+Soil erosion detection is a complex problem as it involves multiple factors such as soil type, land use, climate, topography, and more.
+To solve this problem most efectively we need to take several steps. 
+The first step is to gather data about the problem. This can include aerial images, ground-level photographs, rainfall data, soil type, land use, and more. Analyzing this data can help identify areas that are at higher risk of soil erosion.
+Good choice is to use remote sensing technology to monitor changes in land use and vegetation cover.
+Machine learning models can be trained on historical data to predict areas that are at risk of soil erosion.
+These models can take into account various factors such as topography, land use, rainfall, and soil type. 
+One of such models was built by me. 
+The model described is a UNet architecture for image segmentation, which is used to detect objects or regions of interest within an image. 
+The architecture consists of a contracting path and an expansive path.
+The contracting path applies a series of convolutional layers, each followed by a max pooling layer to downsample the image, while increasing the number of feature maps. 
+The number of feature maps is increased from 16 to 128 in the first four blocks. The last block in the contracting path consists of two convolutional layers with 160 feature maps each.
+The expansive path consists of a series of transposed convolutional layers, each followed by a concatenation with the corresponding feature maps from the contracting path. 
+The number of feature maps is decreased from 128 to 16 in reverse order to the contracting path. 
+Each layer in the expansive path consists of two convolutional layers with the same number of feature maps as in the corresponding contracting path block.
+The output of the last convolutional layer in the model is passed through a sigmoid activation function, which produces a pixel-wise probability map indicating the probability of each pixel belonging to the object of interest.
+The model uses a weighted binary cross-entropy loss function, which allows the user to assign different weights to the positive and negative classes, to handle imbalanced datasets. 
+In this case, a weight ratio of 9:1 is used for the positive and negative classes, respectively.
+The model is trained on a set of training images (X_train) and corresponding segmentation masks (y_train) for 100 epochs, using the Adam optimizer. During training, the best model with the maximum validation accuracy is saved using a ModelCheckpoint callback, while early stopping is used to prevent overfitting. Finally, the trained model is saved for future use. 
+As the data provided wasn't big enought, model has only 74.63% of accuracy. 
+Nonetheless it could be improved, using more data for training. 
+Once areas that are at risk of soil erosion are identified, erosion control measures such as planting vegetation, constructing terraces, and installing drainage systems can be implemented to prevent soil erosion.
+
+
